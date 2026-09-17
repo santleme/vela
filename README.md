@@ -36,20 +36,26 @@ recreated install.
 ## Agent Index registration and checks
 
 The image fetches exactly the pinned client in `vendor/client.pin` and verifies
-its SHA-256 during the image build. From this directory, with the credential
-loaded only into the current shell:
+its SHA-256 during the image build. From this directory, use the persistent-
+volume registration path:
 
 ```sh
-curl -fsSLO https://raw.githubusercontent.com/plow-pbc/agent-index-client/f900ff144076f0a766584b6ec4d0993600779b16/standalone/agent_index_client.py
-chmod +x agent_index_client.py
-./agent_index_client.py --self-check
-set -a; . ./plow-credentials; set +a
-./agent_index_client.py --register --agent vela --name "Vela" \
-  --blurb "A lightweight Plow agent for recurring real-world workflows through Plow. Initial capabilities are intentionally minimal while its product direction is being finalized." \
-  --runtime "Hermes / Plow"
-./agent_index_client.py status
-./agent_index_client.py --agent vela --dry-run
+docker compose run --rm --no-deps --build --user 10000:10000 \
+  --entrypoint /bin/sh agent -c \
+  '/opt/hermes/.venv/bin/python3 /opt/plow/agent-index-client.py --self-check && \
+   /opt/hermes/.venv/bin/python3 /opt/plow/agent-index-client.py --register \
+     --agent vela --name "Vela" \
+     --blurb "A lightweight Plow agent for recurring real-world workflows through Plow. Initial capabilities are intentionally minimal while its product direction is being finalized." \
+     --repo "https://github.com/santleme/vela" --runtime "Hermes / Plow" && \
+   /opt/hermes/.venv/bin/python3 /opt/plow/agent-index-client.py status'
+docker compose up --build -d
+docker compose exec -T agent /opt/hermes/.venv/bin/python3 \
+  /opt/plow/agent-index-client.py --agent vela --dry-run
 ```
+
+The `--user 10000:10000` registration is important: it makes the persistent
+Agent Index state readable and writable by the s6 reporter, while the normal
+container still starts as the base image's root `/init` process.
 
 The runtime reporter is the official s6 longrun under
 `image/s6-overlay/s6-rc.d/agent-index`. It registers only when the client says
@@ -66,4 +72,3 @@ and reporter wiring intact.
 
 New Vela files are MIT licensed. The Plow Hermes base image and the downloaded
 Agent Index client remain under their upstream licenses; see NOTICE.
-
