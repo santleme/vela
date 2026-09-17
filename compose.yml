@@ -4,10 +4,14 @@ services:
     env_file: ${PLOW_CREDENTIALS:-./plow-credentials}
     environment:
       AGENT_ID: vela
+      VELA_CORE_ROOT: /opt/vela
+      VELA_STATE_PATH: /var/lib/hermes/vela/state.json
+      # Vela's current product surface is SMS-only; opt back into the relay
+      # only when a future capability actually needs it.
+      VELA_SMS_ONLY: "true"
     volumes:
       - vela-home:/var/lib/hermes
     stop_grace_period: 35s
 
 volumes:
   vela-home:
-

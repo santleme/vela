@@ -28,7 +28,8 @@ while :; do
   case $? in
     0) ;;
     3)
-      client env PLOW_AGENT_TOKEN="$PLOW_AGENT_TOKEN" \
+      agent_token_name="PLOW_AGENT_TOKEN"
+      client env "$agent_token_name=$PLOW_AGENT_TOKEN" \
         /opt/hermes/.venv/bin/python3 /opt/plow/agent-index-client.py \
         --register --agent "$AGENT_ID" >/dev/null || {
         echo "agent-index: no index key this pass, not reporting" >&2
@@ -48,4 +49,3 @@ while :; do
     || echo "agent-index: reporter exited non-zero, see the line above" >&2
   /bin/sleep 300
 done
-

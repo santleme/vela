@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "capabilities": {
+    "memory": {
+      "description": "Remember durable summaries in Vela's persistent state.",
+      "always_available": true,
+      "requires_authorization": false
+    },
+    "browser": {
+      "description": "Browse the user's authorized browser through Plow/Latch.",
+      "tool_patterns": ["browser*", "plow_browser*"],
+      "relay_skill_patterns": ["browser*", "web*"],
+      "requires_authorization": true,
+      "request": "connect browser access through Plow/Latch",
+      "benefit": "I could research pages and complete browser workflows with you."
+    },
+    "files": {
+      "description": "Read or write files in the user's authorized environment.",
+      "tool_patterns": ["plow_read_file", "plow_write_file", "plow_run_command"],
+      "relay_skill_patterns": ["file*", "computer*", "owners-mac"],
+      "requires_authorization": true,
+      "request": "connect file access through Plow/Latch",
+      "benefit": "I could inspect and update the files you explicitly point me at."
+    },
+    "calendar": {
+      "description": "Inspect or update calendars through an authorized connector.",
+      "tool_patterns": ["calendar*", "plow_calendar*", "plow_run_command"],
+      "relay_skill_patterns": ["calendar*", "google-workspace", "owners-mac"],
+      "requires_authorization": true,
+      "request": "connect calendar access through Plow/Latch",
+      "benefit": "I could check your agenda and learn repeatable meeting workflows."
+    },
+    "mail": {
+      "description": "Read or send mail through an authorized connector.",
+      "tool_patterns": ["mail*", "gmail*", "plow_send_message", "plow_run_command"],
+      "relay_skill_patterns": ["mail*", "gmail*", "google-workspace", "owners-mac"],
+      "requires_authorization": true,
+      "request": "connect mail access through Plow/Latch",
+      "benefit": "I could find messages and help with the mail workflows you teach me."
+    },
+    "shell": {
+      "description": "Run a user-authorized command through the Plow/Latch relay.",
+      "tool_patterns": ["terminal*", "shell*", "plow_run_command"],
+      "relay_skill_patterns": ["shell*", "terminal*", "owners-mac"],
+      "requires_authorization": true,
+      "request": "connect command execution through Plow/Latch",
+      "benefit": "I could automate a command-line workflow after you approve it."
+    },
+    "scheduler": {
+      "description": "Register an optional Hermes scheduled job for meaningful events.",
+      "tool_patterns": ["hermes_cron", "cron"],
+      "detect_executable": true,
+      "requires_authorization": true,
+      "request": "let me register an optional quiet Hermes schedule",
+      "benefit": "I could check an agreed routine on a schedule and stay silent when nothing changed."
+    }
+  }
+}
