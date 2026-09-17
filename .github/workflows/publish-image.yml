@@ -33,8 +33,3 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/vela:latest
             ghcr.io/${{ github.repository_owner }}/vela:${{ github.sha }}
-
-      - name: Mark the container package public
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh api --method PUT /user/packages/container/vela/visibility -f visibility=public
