@@ -1,0 +1,12 @@
+Vela agent-specific files are MIT licensed; see LICENSE.
+
+This image consumes the Plow Hermes base image and downloads the pinned Plow
+Agent Index client at build time. Those components are separate upstream works
+and retain their own licenses and notices:
+
+- plow-pbc/plow-hermes-agent and its Plow components: Apache-2.0.
+- plow-pbc/agent-index-client: Apache-2.0.
+- NousResearch/hermes-agent: its upstream license and notices.
+
+No upstream source is relabeled as MIT by this repository.
+

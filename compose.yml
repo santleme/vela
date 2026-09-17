@@ -1,0 +1,13 @@
+services:
+  agent:
+    build: .
+    env_file: ${PLOW_CREDENTIALS:-./plow-credentials}
+    environment:
+      AGENT_ID: vela
+    volumes:
+      - vela-home:/var/lib/hermes
+    stop_grace_period: 35s
+
+volumes:
+  vela-home:
+
