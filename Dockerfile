@@ -4,8 +4,8 @@
 FROM public.ecr.aws/e1h7x4a2/plow-cloud-agents:base-910b8e3ba8980e20faae9f37dcaca0ea9d8bd9ae@sha256:f4739b6e74309dcccd087792949fd613191db7f33d33109c78127684dcb5dd73
 
 LABEL org.opencontainers.image.title="Vela"
-LABEL org.opencontainers.image.description="Early Vela Plow agent"
-LABEL org.opencontainers.image.source="https://github.com/baskpascal/vela"
+LABEL org.opencontainers.image.description="Vela social sidekick presence for Plow"
+LABEL org.opencontainers.image.source="https://github.com/santleme/vela"
 LABEL org.opencontainers.image.licenses="MIT"
 
 # plow-init composes the final SOUL.md from the base persona and this file on
@@ -28,4 +28,3 @@ COPY LICENSE NOTICE /usr/share/doc/vela/
 COPY image/s6-overlay/ /etc/s6-overlay/
 
 VOLUME ["/var/lib/hermes"]
-

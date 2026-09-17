@@ -1,9 +1,9 @@
 # Vela
 
-Vela is an early, intentionally minimal Plow Hermes agent. Its product concept,
-persona details, skills, branding, and description are deliberately easy to
-replace later; the Plow runtime and Agent Index integration are the stable
-infrastructure layer.
+Vela is a presence-only social sidekick for the Mako universe. It participates
+in the shared Plow group when directly addressed, but does not own quests, XP,
+memory, cron jobs or Mako's RPG state. Its Plow runtime, line, credential,
+volume and repository remain independent.
 
 ## Current identity
 
@@ -61,6 +61,13 @@ The runtime reporter is the official s6 longrun under
 `image/s6-overlay/s6-rc.d/agent-index`. It registers only when the client says
 the persistent install state is absent, gives the Plow bearer only to that
 registration exchange, and reports every five minutes without the bearer.
+
+## Mako group contract
+
+The intended integration is a Plow group containing the owner, Mako and Vela.
+The group roster identifies Mako and Vela as peer Plow agents. Vela responds
+only when addressed or when the owner explicitly asks for a social perspective;
+it does not change Mako's RPG state and there is no custom RPC or shared volume.
 
 ## Later evolution
 
