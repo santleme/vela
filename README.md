@@ -48,7 +48,7 @@ memory and learned state.
 
 ## Agent Index
 
-The image keeps the pinned Agent Index client and the existing persistent
+The Plow base image ships the Agent Index client and its persistent
 registration/reporting service. Register the persistent install as Vela, then
 start the normal service:
 
